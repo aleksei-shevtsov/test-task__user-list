@@ -1,11 +1,11 @@
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 
-import "./App.css";
-
-import { Grid, Box } from "@mui/material";
+import { Grid } from "@mui/material";
 import UsersList from "./components/UsersList";
 import Search from "./components/Search";
+
+import "./App.css";
 
 function App() {
   return (

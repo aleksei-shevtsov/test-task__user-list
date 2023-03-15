@@ -1,9 +1,8 @@
 export interface IUserListState {
-  isLoading: true;
   users: IUser[];
   status: Status;
-  search: "";
-  searchData: [];
+  inputValue: string;
+  searchData: [] | IUser[];
 }
 
 export interface IUser {

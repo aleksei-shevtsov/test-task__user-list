@@ -1,28 +1,8 @@
 .deleteButton {
-  height: 0.5rem;
-  width: 1.5rem;
-  /* border-radius: 10px; */
-  /* opacity: 0; */
-  transition: box-shadow 1s;
+  margin-bottom: -22px;
+  position: relative;
+  top: -10px;
 }
-
-.deleteButton:hover {
-  /* opacity: 1; */
-  cursor: pointer;
-  /* background: rgba(34, 60, 80, 0.15); */
-  -webkit-box-shadow: 0px 28px 5px 2px rgba(34, 60, 80, 0.2);
-  -moz-box-shadow: 0px 28px 5px 2px rgba(34, 60, 80, 0.2);
-  box-shadow: 0px 28px 5px 2px rgba(34, 60, 80, 0.2);
-  /* ///// */
-  /* box-shadow: 10px 0 11px rgba(33, 33, 33, 0.2); */
-}
-
-/* .deleteButton:first-child:hover {
-  background: green;
-  height: 0.5rem;
-  width: 1.5rem;
-  border-radius: 12px;
-} */
 
 .deleteButton:active {
   transform: translateY(1px);

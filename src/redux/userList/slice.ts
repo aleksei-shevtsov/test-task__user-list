@@ -17,7 +17,16 @@ const userList = createSlice({
   initialState,
   reducers: {
     removeItem(state, action: PayloadAction<number>) {
-      state.users = state.users.filter((user) => user.id !== action.payload);
+      state.users = state.users.filter((user) => {
+        if (user.id !== action.payload) {
+          return user;
+        } else {
+          return (user.isDeleted = true);
+        }
+      });
+    },
+    resetRemovedItems(state) {
+      state.users = state.users.map((user) => ({ ...user, isDeleted: false }));
     },
     setInputValue(state, action: PayloadAction<string>) {
       state.inputValue = action.payload;
@@ -35,7 +44,9 @@ const userList = createSlice({
       fetchUsers.fulfilled,
       (state, action: PayloadAction<IUser[]>) => {
         state.status = Status.SUCCESS;
-        state.users = action.payload;
+        state.users = action.payload.map((user) => {
+          return { ...user, isDeleted: false };
+        });
       }
     );
     builder.addCase(fetchUsers.rejected, (state) => {
@@ -45,6 +56,7 @@ const userList = createSlice({
   },
 });
 
-export const { removeItem, setInputValue, setSearchData } = userList.actions;
+export const { removeItem, resetRemovedItems, setInputValue, setSearchData } =
+  userList.actions;
 
 export default userList.reducer;

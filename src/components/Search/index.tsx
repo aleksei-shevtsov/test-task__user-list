@@ -1,12 +1,17 @@
 import React from "react";
-import debounce from "lodash.debounce";
+
+import { onSearchMethod } from "../../utils/onSearchMethod";
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { setInputValue, setSearchData } from "../../redux/userList/slice";
+import {
+  resetRemovedItems,
+  setInputValue,
+  setSearchData,
+} from "../../redux/userList/slice";
 import { selectUsers } from "./../../redux/userList/selectors";
 
 import { Grid, TextField } from "@mui/material";
-import { onSearchMethod } from "../../utils/onSearchMethod";
+import Button from "@mui/material/Button";
 
 const Search = () => {
   const users = useAppSelector(selectUsers);
@@ -21,26 +26,47 @@ const Search = () => {
     dispatch(setSearchData(newArr));
   };
 
-  const updateSearchValue = React.useCallback(
-    debounce((str: string) => {
-      console.log("str", str);
-      dispatch(setInputValue(str));
-    }, 800),
-    []
-  );
+  const updateSearchValue = React.useCallback((str: string) => {
+    dispatch(setInputValue(str));
+  }, []);
 
   return (
-    <Grid item xs={12} margin={2}>
-      <TextField
-        value={value}
-        onChange={onChangeInput}
-        fullWidth
-        autoFocus
-        className="input"
-        placeholder="Leanne Graham"
-        id="outlined-required"
-        label="I'm looking for..."
-      />
+    <Grid container justifyContent="center" sx={{ flexWrap: "nowrap" }}>
+      <Grid
+        item
+        xs={10}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          bgcolor: "background.paper",
+          marginLeft: 2,
+        }}
+      >
+        <TextField
+          value={value}
+          onChange={onChangeInput}
+          fullWidth
+          autoFocus
+          className="input"
+          placeholder="Leanne Graham"
+          id="outlined-required"
+          label="I'm looking for..."
+        />
+      </Grid>
+      <Grid
+        item
+        xs={2}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          bgcolor: "background.paper",
+          marginRight: 2,
+        }}
+      >
+        <Button onClick={() => dispatch(resetRemovedItems())} variant="text">
+          Reset
+        </Button>
+      </Grid>
     </Grid>
   );
 };

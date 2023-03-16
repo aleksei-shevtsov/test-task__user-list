@@ -22,6 +22,7 @@ export interface IUser {
   company: {
     name: string;
   };
+  isDeleted: boolean;
 }
 
 export enum Status {

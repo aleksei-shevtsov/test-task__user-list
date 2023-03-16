@@ -24,6 +24,13 @@ const userList = createSlice({
           return (user.isDeleted = true);
         }
       });
+      state.searchData = state.searchData.filter((user) => {
+        if (user.id !== action.payload) {
+          return user;
+        } else {
+          return (user.isDeleted = true);
+        }
+      });
     },
     resetRemovedItems(state) {
       state.users = state.users.map((user) => ({ ...user, isDeleted: false }));

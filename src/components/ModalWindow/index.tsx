@@ -1,9 +1,7 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import {
   Modal,
   Box,
-  Button,
-  Typography,
   List,
   ListSubheader,
   ListItemButton,
@@ -14,8 +12,6 @@ import {
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-// import InboxIcon from "@mui/icons-material/MoveToInbox";
-// import StarBorder from "@mui/icons-material/StarBorder";
 
 import { IUser } from "../../redux/userList/types";
 
@@ -24,16 +20,16 @@ type ListProps = {
   user: IUser;
 };
 
-const style = {
+const responsiveBox = {
   position: "absolute" as "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: { xs: "80%", sm: 300, md: 400 },
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
-  p: 4,
+  p: 2.5,
 };
 
 const ModalWindow: React.FC<ListProps> = ({ handleClose, user }) => {
@@ -53,15 +49,24 @@ const ModalWindow: React.FC<ListProps> = ({ handleClose, user }) => {
         onClose={handleClose}
         aria-labelledby="Additional info about the user"
         aria-describedby="User Address and  User Company"
+        sx={{ alignItems: "center" }}
       >
-        <Box sx={style}>
+        <Box sx={responsiveBox}>
           <List
-            sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+            sx={{
+              width: "100%",
+              bgcolor: "background.paper",
+            }}
             component="nav"
             aria-labelledby="nested-list-subheader"
             subheader={
-              <ListSubheader component="div" id="nested-list-subheader">
-                Additional info about {user.name}
+              <ListSubheader
+                component="div"
+                id="nested-list-subheader"
+                sx={{ width: "200px", lineHeight: 1.5, marginBottom: "20px" }}
+              >
+                Additional info about <br />
+                <b>{user.name}</b>
               </ListSubheader>
             }
           >
@@ -71,7 +76,7 @@ const ModalWindow: React.FC<ListProps> = ({ handleClose, user }) => {
             </ListItemButton>
             <Collapse in={openAddress} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemButton>
                   <ListItemIcon>
                     <FiberManualRecordIcon />
                   </ListItemIcon>
@@ -87,7 +92,7 @@ const ModalWindow: React.FC<ListProps> = ({ handleClose, user }) => {
             </ListItemButton>
             <Collapse in={openCompany} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemButton>
                   <ListItemIcon>
                     <FiberManualRecordIcon />
                   </ListItemIcon>

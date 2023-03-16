@@ -14,10 +14,16 @@ import { Grid, TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 
 const Search = () => {
+  const [value, setValue] = React.useState<string>("");
   const users = useAppSelector(selectUsers);
   const dispatch = useAppDispatch();
 
-  const [value, setValue] = React.useState<string>("");
+  const responsiveInputGrid = {
+    display: "flex",
+    justifyContent: "center",
+    bgcolor: "background.paper",
+    marginLeft: 2,
+  };
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -32,16 +38,7 @@ const Search = () => {
 
   return (
     <Grid container justifyContent="center" sx={{ flexWrap: "nowrap" }}>
-      <Grid
-        item
-        xs={10}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          bgcolor: "background.paper",
-          marginLeft: 2,
-        }}
-      >
+      <Grid item xs={9} sm={10} md={11} sx={responsiveInputGrid}>
         <TextField
           value={value}
           onChange={onChangeInput}
@@ -55,12 +52,14 @@ const Search = () => {
       </Grid>
       <Grid
         item
-        xs={2}
+        xs={3}
+        sm={2}
+        md={1}
         sx={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "flex-end",
           bgcolor: "background.paper",
-          marginRight: 2,
+          marginRight: { xs: "35px" },
         }}
       >
         <Button onClick={() => dispatch(resetRemovedItems())} variant="text">

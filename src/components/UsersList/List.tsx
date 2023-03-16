@@ -5,6 +5,8 @@ import { IUser } from "../../redux/userList/types";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { removeItem } from "../../redux/userList/slice";
 
+import { responsiveBox, responsiveValue, responsiveWrapper } from "./constants";
+
 import { Box, Grid } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -19,10 +21,8 @@ type ListProps = {
 
 const List: React.FC<ListProps> = ({ list }) => {
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
-
   const dispatch = useAppDispatch();
   const { inputValue, searchData } = useAppSelector((state) => state.userList);
-
   const renderList = searchData.length ? searchData : list;
 
   return (
@@ -31,63 +31,64 @@ const List: React.FC<ListProps> = ({ list }) => {
         (user) =>
           !user.isDeleted && (
             <React.Fragment key={user.id}>
-              <Box
-                onClick={() => setSelectedUser(user)}
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  boxShadow: 5,
-                  borderRadius: 2,
-                  bgcolor: "background.paper",
-                  minWidth: 300,
-                  padding: 4,
-                  margin: 2,
-                }}
-              >
-                <Grid item xs={1}>
-                  <div>
-                    <b>name:</b>
-                  </div>
-                </Grid>
-                <Grid item xs={3}>
-                  <div
-                    dangerouslySetInnerHTML={isHighlight(inputValue, user.name)}
-                  ></div>
+              <Box onClick={() => setSelectedUser(user)} sx={responsiveWrapper}>
+                <Grid xs={1.5} md={3} sx={responsiveBox}>
+                  <Grid item xs={3}>
+                    <Box>
+                      <b>name:</b>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={9} sx={responsiveValue}>
+                    <Box
+                      dangerouslySetInnerHTML={isHighlight(
+                        inputValue,
+                        user.name
+                      )}
+                    ></Box>
+                  </Grid>
                 </Grid>
 
-                <Grid item xs={1.5}>
-                  <div>
+                <Grid xs={2} md={3} sx={responsiveBox}>
+                  <Grid item xs={5}>
                     <b>username:</b>
-                  </div>
-                </Grid>
-                <Grid item xs={2.5}>
-                  <div
+                  </Grid>
+                  <Grid
+                    item
+                    xs={7}
+                    sx={responsiveValue}
                     dangerouslySetInnerHTML={isHighlight(
                       inputValue,
                       user.username
                     )}
-                  ></div>
+                  ></Grid>
                 </Grid>
 
-                <Grid item xs={1}>
-                  <div>
+                <Grid xs={3} md={3} sx={responsiveBox}>
+                  <Grid item xs={3}>
                     <b>email:</b>
-                  </div>
-                </Grid>
-                <Grid item xs={2}>
-                  <div
+                  </Grid>
+                  <Grid
+                    item
+                    xs={9}
+                    sx={responsiveValue}
                     dangerouslySetInnerHTML={isHighlight(
                       inputValue,
                       user.email
                     )}
-                  ></div>
+                  ></Grid>
                 </Grid>
+
                 <Grid
                   item
-                  xs={1}
-                  sx={{ display: "flex", justifyContent: "flex-end" }}
+                  xs={1.5}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: { xs: "center", md: "unset" },
+                    alignSelf: { xs: "end", sm: "unset" },
+                  }}
                 >
-                  <div
+                  <Box
                     className={styles.deleteButton}
                     onClick={(e) => e.stopPropagation()}
                   >
@@ -97,7 +98,7 @@ const List: React.FC<ListProps> = ({ list }) => {
                     >
                       <DeleteIcon />
                     </IconButton>
-                  </div>
+                  </Box>
                 </Grid>
               </Box>
             </React.Fragment>

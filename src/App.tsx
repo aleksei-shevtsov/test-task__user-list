@@ -5,16 +5,22 @@ import { Grid } from "@mui/material";
 import UsersList from "./components/UsersList";
 import Search from "./components/Search";
 
-import "./App.css";
-
 function App() {
   return (
     <Provider store={store}>
       <Grid
         container
         rowSpacing={5}
-        sx={{ color: "text" }}
-        style={{ margin: "10rem 0" }}
+        sx={{
+          color: "text",
+          maxWidth: 1200,
+          margin: {
+            xs: "3rem auto",
+            sm: "5rem auto",
+            md: "10rem auto",
+          },
+          fontSize: { xs: "13px", sm: "16px" },
+        }}
       >
         <Search />
         <UsersList />

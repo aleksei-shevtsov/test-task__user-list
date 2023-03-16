@@ -1,6 +1,7 @@
 {
   "name": "user-list",
   "version": "0.1.0",
+  "homepage": "https://aleksei-shevtsov.github.io/test-task__user-list",
   "private": true,
   "dependencies": {
     "@csstools/normalize.css": "^12.0.0",
@@ -27,6 +28,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -52,6 +55,7 @@
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.0",
-    "@types/lodash.debounce": "^4.0.7"
+    "@types/lodash.debounce": "^4.0.7",
+    "gh-pages": "^5.0.0"
   }
 }

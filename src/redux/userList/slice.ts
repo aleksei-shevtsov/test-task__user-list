@@ -33,7 +33,13 @@ const userList = createSlice({
       });
     },
     resetRemovedItems(state) {
-      state.users = state.users.map((user) => ({ ...user, isDeleted: false }));
+      state.users = state.users.map((user) => {
+        return { ...user, isDeleted: false };
+      });
+
+      state.searchData = state.searchData.map((user) => {
+        return { ...user, isDeleted: false };
+      });
     },
     setInputValue(state, action: PayloadAction<string>) {
       state.inputValue = action.payload;
